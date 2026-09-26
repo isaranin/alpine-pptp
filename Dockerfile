@@ -1,8 +1,11 @@
-FROM ubuntu:16.04
-MAINTAINER Przemek Szalko <przemek@mobtitude.com>
+FROM alpine:3.17
+LABEL org.opencontainers.image.authors="ivan@saranin.com"
 
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get install -y pptpd iptables
+# Installing pptpd, ppp and iptables
+RUN apk add --no-cache \
+    pptpd \
+    ppp \
+    iptables
 
 COPY ./etc/pptpd.conf /etc/pptpd.conf
 COPY ./etc/ppp/pptpd-options /etc/ppp/pptpd-options
